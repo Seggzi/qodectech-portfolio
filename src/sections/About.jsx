@@ -106,6 +106,7 @@ export default function About() {
               <div key={i} className="about__tl-item">
                 <div className="about__tl-left">
                   <span className="about__tl-year mono accent">{item.year}</span>
+                  <span className="about__tl-dot" />
                   {i < timeline.length - 1 && <span className="about__tl-line" />}
                 </div>
                 <div className="about__tl-body">

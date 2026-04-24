@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import PageManager from './components/PageManager'
 import Hero from './sections/Hero'
 import About from './sections/About'
+import Skills from './sections/Skills'
 
 function ph(label, color) {
   return (
@@ -24,7 +25,7 @@ export default function App() {
   const pages = [
     <Hero    key="hero"     onNavigate={setActivePage} />,
     <About   key="about"   />,
-    ph('03 — Skills',   '#2dd4bf'),
+    <Skills  key="skills"  />,
     ph('04 — Work',     '#d4a853'),
     ph('05 — Services', '#2dd4bf'),
     ph('06 — Contact',  '#d4a853'),

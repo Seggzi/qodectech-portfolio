@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-/* subtle bg accent */
+/* ── BG ORBS ── */
 .about::before {
   content: '';
   position: absolute;
@@ -18,7 +18,18 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,168,83,0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about::after {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -8%;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,212,191,0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -46,6 +57,21 @@
   height: 100%;
   box-sizing: border-box;
   scrollbar-width: none;
+  /* fade top & bottom edges to hint scroll */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent 100%
+  );
 }
 .about__left::-webkit-scrollbar { display: none; }
 
@@ -91,11 +117,14 @@
   border: 1px solid var(--color-border-md);
   padding: 0.35rem 0.75rem;
   border-radius: 20px;
-  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+  transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.2s;
 }
 .about__trait:hover {
   border-color: var(--color-accent);
   color: var(--color-text);
+  background: rgba(45,212,191,0.06);
+  transform: translateY(-1px);
 }
 
 /* ── RIGHT — independent scroll ── */
@@ -108,6 +137,20 @@
   height: 100%;
   box-sizing: border-box;
   scrollbar-width: none;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent 100%
+  );
 }
 .about__right::-webkit-scrollbar { display: none; }
 
@@ -127,11 +170,13 @@
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: default;
 }
 .about__stat:hover {
-  border-color: rgba(45,212,191,0.3);
-  transform: translateY(-2px);
+  border-color: rgba(45,212,191,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(45,212,191,0.08);
 }
 .about__stat-value {
   font-family: var(--font-display);
@@ -173,11 +218,23 @@
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+/* Dot on timeline connector */
+.about__tl-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+  margin: 5px 0 2px;
+  box-shadow: 0 0 6px rgba(45,212,191,0.4);
+}
+
 .about__tl-line {
   flex: 1;
   width: 1px;
   background: var(--color-border-md);
-  margin: 4px 0;
+  margin: 0;
   min-height: 20px;
 }
 
@@ -207,6 +264,11 @@
   border-radius: 14px;
   padding: 1.1rem 1.25rem;
   animation: fadeUp 0.6s var(--ease) 0.35s both;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.about__vision:hover {
+  border-color: rgba(212,168,83,0.4);
+  box-shadow: 0 8px 24px rgba(212,168,83,0.07);
 }
 .about__vision-icon {
   font-size: 1.4rem;
@@ -225,7 +287,28 @@
   line-height: 1.65;
 }
 
-/* ── RESPONSIVE — mobile: natural single-column flow ── */
+/* ── DIVIDER between columns ── */
+@media (min-width: 901px) {
+  .about__inner::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    bottom: 8%;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-border-md) 25%,
+      var(--color-border-md) 75%,
+      transparent
+    );
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+}
+
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .about {
     height: auto;
@@ -241,12 +324,13 @@
     gap: 2.5rem;
   }
 
-  /* Remove independent scroll on mobile — let the page scroll naturally */
   .about__left,
   .about__right {
     overflow-y: visible;
     height: auto;
     padding: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 
   .about__stats {
