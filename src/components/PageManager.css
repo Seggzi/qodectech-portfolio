@@ -1,0 +1,28 @@
+.page-manager {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.page-manager--enter {
+  animation: pageEnter 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.page-manager--exit-next {
+  animation: pageExitNext 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.page-manager--exit-prev {
+  animation: pageExitPrev 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pageExitNext {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-18px); }
+}
+@keyframes pageExitPrev {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(18px); }
+}

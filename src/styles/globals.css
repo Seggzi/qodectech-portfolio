@@ -1,0 +1,161 @@
+/* ─── RESET ─────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── THEME VARIABLES ────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --color-bg:         #080808;
+  --color-surface:    #101010;
+  --color-card:       #161616;
+  --color-card-hover: #1c1c1c;
+
+  /* Borders */
+  --color-border:     #222222;
+  --color-border-md:  #2e2e2e;
+
+  /* Text */
+  --color-text:       #f0ede8;
+  --color-muted:      #666666;
+  --color-subtle:     #444444;
+
+  /* Accent — warm gold */
+  --color-accent:     #d4a853;
+  --color-accent-dim: #a07a35;
+  --color-accent-glow:rgba(212, 168, 83, 0.12);
+
+  /* Semantic */
+  --color-green:      #4a9e6b;
+  --color-red:        #c94c3a;
+
+  /* Typography */
+  --font-display:  'Bebas Neue', sans-serif;
+  --font-body:     'Syne', sans-serif;
+  --font-mono:     'DM Mono', monospace;
+
+  /* Spacing scale */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   2rem;
+  --space-lg:   4rem;
+  --space-xl:   8rem;
+
+  /* Transitions */
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:   0.25s var(--ease);
+}
+
+/* ─── BASE ───────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── SELECTION ──────────────────────────────────────── */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border-md); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-dim); }
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* ─── UTILITIES ──────────────────────────────────────── */
+.mono       { font-family: var(--font-mono); }
+.accent     { color: var(--color-accent); }
+.muted      { color: var(--color-muted); }
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+/* ─── SECTION LABEL ──────────────────────────────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+/* ─── DIVIDER ────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ─── FADE IN ANIMATION ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s var(--ease) both;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 1.5rem; }
+  .section   { padding: var(--space-lg) 0; }
+}
