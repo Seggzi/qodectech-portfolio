@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {
   RiHome4Line, RiUser3Line, RiCodeSSlashLine,
   RiBriefcaseLine, RiServiceLine, RiMailLine,
@@ -16,23 +16,50 @@ const navItems = [
 ]
 
 export default function Sidebar({ activePage, onNavigate }) {
+  const [expanded, setExpanded]     = useState(false)
+  const [locked,   setLocked]       = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const leaveTimer = useRef(null)
+
+  const handleMouseEnter = () => {
+    clearTimeout(leaveTimer.current)
+    setExpanded(true)
+  }
+
+  const handleMouseLeave = () => {
+    leaveTimer.current = setTimeout(() => {
+      setExpanded(false)
+      setLocked(false)
+    }, 300)
+  }
 
   const handleNav = (id) => {
     onNavigate(id)
+    setLocked(true)
+    setExpanded(true)
     setMobileOpen(false)
   }
 
+  const isExpanded = expanded || locked
+
   return (
     <>
-      {/* ── DESKTOP: Floating pill sidebar ── */}
-      <aside className="sidebar">
-        {/* Logo mark */}
+      {/* ── DESKTOP SIDEBAR ── */}
+      <aside
+        className={`sidebar ${isExpanded ? 'sidebar--expanded' : ''}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Logo row */}
         <div className="sidebar__logo">
           <span className="sidebar__logo-q">Q</span>
+          <span className="sidebar__logo-rest">odec<em>Tech</em></span>
         </div>
 
-        {/* Nav icons */}
+        {/* Divider */}
+        <div className="sidebar__divider" />
+
+        {/* Nav items */}
         <nav className="sidebar__nav">
           {navItems.map(({ id, icon: Icon, label }) => (
             <button
@@ -41,22 +68,33 @@ export default function Sidebar({ activePage, onNavigate }) {
               onClick={() => handleNav(id)}
               aria-label={label}
             >
-              <Icon className="sidebar__icon" />
-              <span className="sidebar__tooltip">{label}</span>
-              {activePage === id && <span className="sidebar__dot" />}
+              {/* Fixed-width icon slot */}
+              <span className="sidebar__icon-slot">
+                <Icon className="sidebar__icon" />
+              </span>
+              {/* Label only visible when expanded */}
+              <span className="sidebar__label">{label}</span>
+              {/* Active indicator bar on right edge */}
+              {activePage === id && <span className="sidebar__active-bar" />}
             </button>
           ))}
         </nav>
 
-        {/* Page counter */}
-        <div className="sidebar__counter">
-          <span className="sidebar__counter-current">{String(activePage + 1).padStart(2, '0')}</span>
-          <span className="sidebar__counter-divider" />
+        {/* Divider */}
+        <div className="sidebar__divider" />
+
+        {/* Counter */}
+        <div className="sidebar__footer">
+          <span className="sidebar__counter-num accent">
+            {String(activePage + 1).padStart(2, '0')}
+          </span>
+          <span className="sidebar__counter-sep"> / </span>
           <span className="sidebar__counter-total">06</span>
+          <span className="sidebar__page-name">{navItems[activePage].label}</span>
         </div>
       </aside>
 
-      {/* ── MOBILE: Floating hamburger button ── */}
+      {/* ── MOBILE HAMBURGER ── */}
       {!mobileOpen && (
         <button
           className="mobile-hamburger"
@@ -67,15 +105,14 @@ export default function Sidebar({ activePage, onNavigate }) {
         </button>
       )}
 
-      {/* ── MOBILE: Drawer overlay ── */}
+      {/* ── MOBILE OVERLAY ── */}
       <div
         className={`mobile-overlay ${mobileOpen ? 'mobile-overlay--open' : ''}`}
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* ── MOBILE: Drawer sidebar ── */}
+      {/* ── MOBILE DRAWER ── */}
       <aside className={`mobile-drawer ${mobileOpen ? 'mobile-drawer--open' : ''}`}>
-        {/* Close button */}
         <button
           className="mobile-drawer__close"
           onClick={() => setMobileOpen(false)}
@@ -84,12 +121,10 @@ export default function Sidebar({ activePage, onNavigate }) {
           <RiCloseLine />
         </button>
 
-        {/* Logo */}
         <div className="mobile-drawer__logo">
           Qodec<span>Tech</span>
         </div>
 
-        {/* Nav links */}
         <nav className="mobile-drawer__nav">
           {navItems.map(({ id, icon: Icon, label }) => (
             <button
@@ -104,7 +139,6 @@ export default function Sidebar({ activePage, onNavigate }) {
           ))}
         </nav>
 
-        {/* Page indicator */}
         <div className="mobile-drawer__footer">
           <span className="mono muted" style={{ fontSize: '0.7rem', letterSpacing: '0.15em' }}>
             {String(activePage + 1).padStart(2, '0')} / 06
