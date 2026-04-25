@@ -1,3 +1,148 @@
+import { useState } from 'react'
+import './Skills.css'
+
+const tabs = [
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'backend',  label: 'Backend'  },
+  { id: 'tools',    label: 'Tools'    },
+]
+
+const skills = {
+  frontend: [
+    { name: 'HTML & CSS',   tag: 'Foundation',  icon: '🌐' },
+    { name: 'JavaScript',   tag: 'Language',    icon: '⚡' },
+    { name: 'TypeScript',   tag: 'Language',    icon: '🔷' },
+    { name: 'React',        tag: 'Framework',   icon: '⚛️' },
+    { name: 'Next.js',      tag: 'Framework',   icon: '▲',  gold: true },
+    { name: 'Tailwind CSS', tag: 'Styling',     icon: '🎨' },
+    { name: 'Bootstrap',    tag: 'Styling',     icon: '🅱️' },
+  ],
+  backend: [
+    { name: 'Supabase',     tag: 'BaaS / DB',   icon: '🟢', gold: true },
+    { name: 'NestJS',       tag: 'Framework',   icon: '🐈' },
+    { name: 'REST APIs',    tag: 'Integration', icon: '🔗' },
+  ],
+  tools: [
+    { name: 'Git & GitHub', tag: 'Version Control', icon: '🐙' },
+    { name: 'VS Code',      tag: 'Editor',          icon: '💙' },
+    { name: 'Vercel',       tag: 'Deployment',      icon: '▲', gold: true },
+  ],
+}
+
+const learning = ['Three.js', 'Node.js', 'C++', 'MySQL']
+
+export default function Skills() {
+  const [activeTab, setActiveTab] = useState('frontend')
+
+  return (
+    <section className="skills">
+      <div className="skills__inner">
+
+        {/* ── LEFT ── */}
+        <div className="skills__left">
+
+          <p className="section-label">Skills</p>
+
+          <h2 className="skills__heading">
+            Crafting with<br />
+            the Right<br />
+            <span className="accent">Stack</span>
+          </h2>
+
+          <p className="skills__desc">
+            Every tool here has been used in a <strong>real project</strong> — not just a
+            tutorial. I pick technologies that ship fast, scale clean, and look great.
+          </p>
+
+          <p className="skills__desc">
+            My core is <strong>TypeScript + Next.js + Tailwind</strong> on the frontend,
+            with <strong>Supabase</strong> handling auth, database, and storage on the backend.
+            I keep the stack tight and learn deep rather than wide.
+          </p>
+
+          {/* Currently learning */}
+          <div className="skills__learning">
+            <p className="skills__learning-label">Currently Exploring</p>
+            <div className="skills__learning-pills">
+              {learning.map(item => (
+                <span key={item} className="skills__learning-pill">{item}</span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── RIGHT ── */}
+        <div className="skills__right">
+
+          {/* Tabs */}
+          <div className="skills__tabs">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                className={`skills__tab ${activeTab === tab.id ? 'skills__tab--active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                <span className="skills__tab-dot" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Panel */}
+          <div className="skills__panel" key={activeTab}>
+            <div className="skills__grid">
+              {skills[activeTab].map(skill => (
+                <div
+                  key={skill.name}
+                  className={`skills__card ${skill.gold ? 'skills__card--gold' : ''}`}
+                >
+                  <div className="skills__card-icon">{skill.icon}</div>
+                  <div className="skills__card-info">
+                    <span className="skills__card-name">{skill.name}</span>
+                    <span className="skills__card-tag">{skill.tag}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .skills {
   width: 100%;
   height: 100vh;
@@ -13,8 +158,10 @@
 .skills::before {
   content: '';
   position: absolute;
-  top: -15%; right: -8%;
-  width: 460px; height: 460px;
+  top: -15%;
+  right: -8%;
+  width: 460px;
+  height: 460px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(45,212,191,0.04) 0%, transparent 70%);
   pointer-events: none;
@@ -22,8 +169,10 @@
 .skills::after {
   content: '';
   position: absolute;
-  bottom: -20%; left: -8%;
-  width: 400px; height: 400px;
+  bottom: -20%;
+  left: -8%;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(212,168,83,0.05) 0%, transparent 70%);
   pointer-events: none;
@@ -41,17 +190,6 @@
   z-index: 1;
   height: 100%;
   align-items: stretch;
-}
-
-/* Column divider — desktop only */
-.skills__inner::before {
-  content: '';
-  position: absolute;
-  left: calc(1fr);
-  top: 8%; bottom: 8%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--color-border-md) 25%, var(--color-border-md) 75%, transparent);
-  pointer-events: none;
 }
 
 /* ── LEFT ── */
@@ -85,9 +223,12 @@
   margin-bottom: 1rem;
   animation: fadeUp 0.6s var(--ease) 0.2s both;
 }
-.skills__desc strong { color: var(--color-text); font-weight: 700; }
+.skills__desc strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
 
-/* Currently learning */
+/* Currently learning strip */
 .skills__learning {
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
@@ -110,15 +251,16 @@
 .skills__learning-label::before {
   content: '';
   display: inline-block;
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--color-accent);
   box-shadow: 0 0 6px var(--color-accent);
   animation: blink 1.8s ease-in-out infinite;
 }
 @keyframes blink {
-  0%,100% { opacity: 1; }
-  50%      { opacity: 0.3; }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
 }
 .skills__learning-pills {
   display: flex;
@@ -134,11 +276,6 @@
   border: 1px solid var(--color-border-md);
   padding: 0.25rem 0.65rem;
   border-radius: 20px;
-  transition: border-color 0.2s, color 0.2s;
-}
-.skills__learning-pill:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
 }
 
 /* ── RIGHT ── */
@@ -196,7 +333,8 @@
   border: 1px solid var(--color-border-md);
 }
 .skills__tab-dot {
-  width: 5px; height: 5px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--color-muted);
   flex-shrink: 0;
@@ -207,27 +345,26 @@
   box-shadow: 0 0 5px var(--color-accent);
 }
 
-/* ── PANEL ── */
+/* ── SKILL GRID PANEL ── */
 .skills__panel {
   animation: fadeUp 0.38s var(--ease) both;
 }
 
-/* ── GRID ── */
 .skills__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
 }
 
-/* ── CARD ── */
+/* ── SKILL CARD ── */
 .skills__card {
   background: var(--color-card);
   border: 1px solid var(--color-border-md);
   border-radius: 14px;
-  padding: 1rem 1.1rem;
+  padding: 1.1rem 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.9rem;
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   cursor: default;
 }
@@ -240,15 +377,20 @@
   border-color: rgba(212,168,83,0.35);
   box-shadow: 0 8px 24px rgba(212,168,83,0.07);
 }
+
 .skills__card-icon {
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   background: var(--color-surface, #101010);
   border: 1px solid var(--color-border-md);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   font-size: 1.1rem;
 }
+
 .skills__card-info {
   display: flex;
   flex-direction: column;
@@ -272,54 +414,41 @@
   color: var(--color-muted);
 }
 
-/* ══════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-══════════════════════════════════ */
-
-/* ── Large desktop (1280px+) ── */
-@media (min-width: 1280px) {
-  .skills__inner { gap: 5rem; }
-  .skills__heading { font-size: 4.5rem; }
-  .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-}
-
-/* ── Tablet landscape (901px–1279px) — default grid, already good ── */
+/* column divider on desktop */
 @media (min-width: 901px) {
   .skills__inner::before {
     content: '';
     position: absolute;
     left: calc((1 / 2.4) * 100%);
-    top: 8%; bottom: 8%;
+    top: 8%;
+    bottom: 8%;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--color-border-md) 25%, var(--color-border-md) 75%, transparent);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-border-md) 25%,
+      var(--color-border-md) 75%,
+      transparent
+    );
     pointer-events: none;
   }
 }
 
-/* ── Tablet portrait (601px–900px) ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .skills {
     height: auto;
     min-height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: visible;
     align-items: flex-start;
-    padding: 2.5rem 1.5rem 3rem;
+    padding: 3rem 1.5rem;
   }
   .skills__inner {
     grid-template-columns: 1fr;
     height: auto;
-    gap: 2rem;
+    gap: 2.5rem;
   }
-  .skills__inner::before { display: none; }
-  .skills__left {
-    overflow-y: visible;
-    height: auto;
-    padding: 0;
-    justify-content: flex-start;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
+  .skills__left,
   .skills__right {
     overflow-y: visible;
     height: auto;
@@ -327,49 +456,15 @@
     mask-image: none;
     -webkit-mask-image: none;
   }
-  .skills__heading { font-size: clamp(2.2rem, 6vw, 3rem); }
-  .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-  .skills__learning { margin-top: 1.25rem; }
-}
-
-/* ── Mobile large (481px–600px) ── */
-@media (max-width: 600px) {
-  .skills { padding: 2rem 1.25rem 3rem; }
-  .skills__heading { font-size: 2.2rem; }
-  .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-  .skills__card { padding: 0.85rem 0.9rem; gap: 0.65rem; }
-  .skills__card-icon { width: 32px; height: 32px; font-size: 1rem; }
-  .skills__card-name { font-size: 0.85rem; }
-  .skills__tab { font-size: 0.6rem; padding: 0.5rem 0.4rem; gap: 0.3rem; }
-}
-
-/* ── Mobile small (≤480px) ── */
-@media (max-width: 480px) {
-  .skills { padding: 2rem 1rem 3rem; }
-  .skills__heading { font-size: 2rem; line-height: 1; }
-  .skills__desc { font-size: 0.82rem; }
-
-  /* Single column cards on very small screens */
-  .skills__grid { grid-template-columns: 1fr; gap: 0.5rem; }
-  .skills__card { padding: 0.8rem 1rem; }
-  .skills__card-icon { width: 34px; height: 34px; }
-  .skills__card-name { font-size: 0.9rem; }
-
-  .skills__tabs { gap: 0.2rem; padding: 0.25rem; }
-  .skills__tab {
-    font-size: 0.58rem;
-    padding: 0.45rem 0.25rem;
-    letter-spacing: 0.08em;
+  .skills__left {
+    justify-content: flex-start;
   }
-  .skills__tab-dot { display: none; }
-
-  .skills__learning { padding: 0.85rem 1rem; }
-  .skills__learning-pill { font-size: 0.62rem; }
+  .skills__heading { font-size: 2.4rem; }
 }
 
-/* ── Very small (≤360px) ── */
-@media (max-width: 360px) {
-  .skills { padding: 1.5rem 0.75rem 2.5rem; }
-  .skills__heading { font-size: 1.8rem; }
-  .skills__tab { font-size: 0.55rem; padding: 0.4rem 0.2rem; }
+@media (max-width: 480px) {
+  .skills { padding: 2.5rem 1rem; }
+  .skills__heading { font-size: 2rem; }
+  .skills__grid { grid-template-columns: 1fr; }
+  .skills__tab { font-size: 0.6rem; padding: 0.5rem 0.35rem; }
 }

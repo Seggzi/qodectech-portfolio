@@ -13,9 +13,7 @@ function ph(label, color) {
       alignItems:'center', justifyContent:'center',
       fontFamily:"'DM Mono',monospace", fontSize:'1rem',
       color, letterSpacing:'0.15em'
-    }}>
-      {label}
-    </div>
+    }}>{label}</div>
   )
 }
 
@@ -23,12 +21,12 @@ export default function App() {
   const [activePage, setActivePage] = useState(0)
 
   const pages = [
-    <Hero    key="hero"     onNavigate={setActivePage} />,
-    <About   key="about"   />,
-    <Skills  key="skills"  />,
-    ph('04 — Work',     '#d4a853'),
-    ph('05 — Services', '#2dd4bf'),
-    ph('06 — Contact',  '#d4a853'),
+    <Hero    key="hero"    onNavigate={setActivePage} />,
+    <About   key="about"  />,
+    <Skills  key="skills" />,
+    ph('04 — Work',     '#2dd4bf'),
+    ph('05 — Services', '#d4a853'),
+    ph('06 — Contact',  '#2dd4bf'),
   ]
 
   useEffect(() => {
