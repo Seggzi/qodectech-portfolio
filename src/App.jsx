@@ -5,6 +5,7 @@ import PageManager from './components/PageManager'
 import Hero from './sections/Hero'
 import About from './sections/About'
 import Skills from './sections/Skills'
+import Work from './sections/Work'
 
 function ph(label, color) {
   return (
@@ -21,10 +22,10 @@ export default function App() {
   const [activePage, setActivePage] = useState(0)
 
   const pages = [
-    <Hero    key="hero"    onNavigate={setActivePage} />,
-    <About   key="about"  />,
-    <Skills  key="skills" />,
-    ph('04 — Work',     '#2dd4bf'),
+    <Hero   key="hero"    onNavigate={setActivePage} />,
+    <About  key="about"  />,
+    <Skills key="skills" />,
+    <Work   key="work"   />,
     ph('05 — Services', '#d4a853'),
     ph('06 — Contact',  '#2dd4bf'),
   ]
