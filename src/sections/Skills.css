@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-/* bg orbs */
 .skills::before {
   content: '';
   position: absolute;
@@ -29,10 +28,10 @@
   pointer-events: none;
 }
 
-/* ── INNER LAYOUT ── */
+/* ── LAYOUT ── */
 .skills__inner {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3.5rem;
   max-width: 1100px;
   width: 100%;
@@ -43,29 +42,31 @@
   align-items: stretch;
 }
 
-/* Column divider — desktop only */
-.skills__inner::before {
-  content: '';
-  position: absolute;
-  left: calc(1fr);
-  top: 8%; bottom: 8%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--color-border-md) 25%, var(--color-border-md) 75%, transparent);
-  pointer-events: none;
+@media (min-width: 901px) {
+  .skills__inner::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 8%; bottom: 8%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--color-border-md) 25%, var(--color-border-md) 75%, transparent);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
 }
 
 /* ── LEFT ── */
 .skills__left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 1rem 3rem 0;
+  justify-content: flex-start;
   overflow-y: auto;
+  padding: 3rem 1.5rem 3rem 0;
   height: 100%;
   box-sizing: border-box;
   scrollbar-width: none;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 4rem, black calc(100% - 4rem), transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4rem, black calc(100% - 4rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 3.5rem, black calc(100% - 3.5rem), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3.5rem, black calc(100% - 3.5rem), transparent 100%);
 }
 .skills__left::-webkit-scrollbar { display: none; }
 
@@ -87,7 +88,6 @@
 }
 .skills__desc strong { color: var(--color-text); font-weight: 700; }
 
-/* Currently learning */
 .skills__learning {
   margin-top: 1.5rem;
   padding: 1rem 1.25rem;
@@ -120,26 +120,16 @@
   0%,100% { opacity: 1; }
   50%      { opacity: 0.3; }
 }
-.skills__learning-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
+.skills__learning-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .skills__learning-pill {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: var(--color-muted);
-  background: var(--color-card);
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--color-muted); background: var(--color-card);
   border: 1px solid var(--color-border-md);
-  padding: 0.25rem 0.65rem;
-  border-radius: 20px;
+  padding: 0.25rem 0.65rem; border-radius: 20px;
   transition: border-color 0.2s, color 0.2s;
 }
-.skills__learning-pill:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
+.skills__learning-pill:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 /* ── RIGHT ── */
 .skills__right {
@@ -150,8 +140,8 @@
   height: 100%;
   box-sizing: border-box;
   scrollbar-width: none;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 4rem, black calc(100% - 4rem), transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4rem, black calc(100% - 4rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 3.5rem, black calc(100% - 3.5rem), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3.5rem, black calc(100% - 3.5rem), transparent 100%);
 }
 .skills__right::-webkit-scrollbar { display: none; }
 
@@ -169,65 +159,37 @@
 }
 .skills__tab {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 0.55rem 0.5rem;
-  cursor: pointer;
-  transition: color 0.2s, background 0.2s;
-  white-space: nowrap;
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-muted); background: transparent;
+  border: none; border-radius: 8px; padding: 0.55rem 0.5rem;
+  cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap;
 }
-.skills__tab:hover {
-  color: var(--color-text);
-  background: rgba(255,255,255,0.04);
-}
+.skills__tab:hover { color: var(--color-text); background: rgba(255,255,255,0.04); }
 .skills__tab--active {
   color: var(--color-text);
   background: var(--color-surface, #101010);
   border: 1px solid var(--color-border-md);
 }
 .skills__tab-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--color-muted);
-  flex-shrink: 0;
-  transition: background 0.2s;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--color-muted); flex-shrink: 0; transition: background 0.2s;
 }
 .skills__tab--active .skills__tab-dot {
   background: var(--color-accent);
   box-shadow: 0 0 5px var(--color-accent);
 }
 
-/* ── PANEL ── */
-.skills__panel {
-  animation: fadeUp 0.38s var(--ease) both;
-}
+.skills__panel { animation: fadeUp 0.38s var(--ease) both; }
 
-/* ── GRID ── */
-.skills__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
+.skills__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
 
-/* ── CARD ── */
 .skills__card {
   background: var(--color-card);
   border: 1px solid var(--color-border-md);
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
+  border-radius: 14px; padding: 1rem 1.1rem;
+  display: flex; align-items: center; gap: 0.85rem;
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   cursor: default;
 }
@@ -241,98 +203,49 @@
   box-shadow: 0 8px 24px rgba(212,168,83,0.07);
 }
 .skills__card-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
+  width: 36px; height: 36px; border-radius: 10px;
   background: var(--color-surface, #101010);
   border: 1px solid var(--color-border-md);
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  font-size: 1.1rem;
+  flex-shrink: 0; font-size: 1.1rem;
 }
-.skills__card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
+.skills__card-info { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
 .skills__card-name {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  color: var(--color-text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: var(--font-display); font-size: 0.95rem;
+  letter-spacing: 0.04em; color: var(--color-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .skills__card-tag {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-muted);
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted);
 }
 
 /* ══════════════════════════════════
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE
 ══════════════════════════════════ */
-
-/* ── Large desktop (1280px+) ── */
 @media (min-width: 1280px) {
   .skills__inner { gap: 5rem; }
   .skills__heading { font-size: 4.5rem; }
-  .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .skills__grid { gap: 1rem; }
 }
 
-/* ── Tablet landscape (901px–1279px) — default grid, already good ── */
-@media (min-width: 901px) {
-  .skills__inner::before {
-    content: '';
-    position: absolute;
-    left: calc((1 / 2.4) * 100%);
-    top: 8%; bottom: 8%;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--color-border-md) 25%, var(--color-border-md) 75%, transparent);
-    pointer-events: none;
-  }
-}
-
-/* ── Tablet portrait (601px–900px) ── */
 @media (max-width: 900px) {
   .skills {
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    align-items: flex-start;
-    padding: 2.5rem 1.5rem 3rem;
+    height: auto; min-height: 100vh;
+    overflow-y: auto; overflow-x: hidden;
+    align-items: flex-start; padding: 2.5rem 1.5rem 3rem;
   }
-  .skills__inner {
-    grid-template-columns: 1fr;
-    height: auto;
-    gap: 2rem;
+  .skills__inner { grid-template-columns: 1fr; height: auto; gap: 2rem; }
+  .skills__left, .skills__right {
+    overflow-y: visible; height: auto; padding: 0;
+    mask-image: none; -webkit-mask-image: none;
   }
-  .skills__inner::before { display: none; }
-  .skills__left {
-    overflow-y: visible;
-    height: auto;
-    padding: 0;
-    justify-content: flex-start;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-  .skills__right {
-    overflow-y: visible;
-    height: auto;
-    padding: 0;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
+  .skills__left { justify-content: flex-start; }
   .skills__heading { font-size: clamp(2.2rem, 6vw, 3rem); }
   .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
   .skills__learning { margin-top: 1.25rem; }
 }
 
-/* ── Mobile large (481px–600px) ── */
 @media (max-width: 600px) {
   .skills { padding: 2rem 1.25rem 3rem; }
   .skills__heading { font-size: 2.2rem; }
@@ -343,31 +256,21 @@
   .skills__tab { font-size: 0.6rem; padding: 0.5rem 0.4rem; gap: 0.3rem; }
 }
 
-/* ── Mobile small (≤480px) ── */
 @media (max-width: 480px) {
   .skills { padding: 2rem 1rem 3rem; }
   .skills__heading { font-size: 2rem; line-height: 1; }
   .skills__desc { font-size: 0.82rem; }
-
-  /* Single column cards on very small screens */
   .skills__grid { grid-template-columns: 1fr; gap: 0.5rem; }
   .skills__card { padding: 0.8rem 1rem; }
   .skills__card-icon { width: 34px; height: 34px; }
   .skills__card-name { font-size: 0.9rem; }
-
   .skills__tabs { gap: 0.2rem; padding: 0.25rem; }
-  .skills__tab {
-    font-size: 0.58rem;
-    padding: 0.45rem 0.25rem;
-    letter-spacing: 0.08em;
-  }
+  .skills__tab { font-size: 0.58rem; padding: 0.45rem 0.25rem; letter-spacing: 0.08em; }
   .skills__tab-dot { display: none; }
-
   .skills__learning { padding: 0.85rem 1rem; }
   .skills__learning-pill { font-size: 0.62rem; }
 }
 
-/* ── Very small (≤360px) ── */
 @media (max-width: 360px) {
   .skills { padding: 1.5rem 0.75rem 2.5rem; }
   .skills__heading { font-size: 1.8rem; }

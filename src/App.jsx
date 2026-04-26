@@ -7,6 +7,7 @@ import About from './sections/About'
 import Skills from './sections/Skills'
 import Work from './sections/Work'
 import Services from './sections/Services'
+import Contact from './sections/Contact'
 
 function ph(label, color) {
   return (
@@ -28,6 +29,7 @@ export default function App() {
     <Skills    key="skills"  />,
     <Work      key="work"    />,
     <Services  key="services" onNavigate={setActivePage} />,
+    <Contact      key="contact"/>,
     ph('06 — Contact', '#2dd4bf'),
   ]
 
