@@ -41,6 +41,7 @@ const timeline = [
 export default function About() {
   return (
     <section className="about">
+      <div className="hero__grid" aria-hidden="true" />
       <div className="about__inner">
 
         {/* ── LEFT COLUMN ── */}

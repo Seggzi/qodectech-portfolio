@@ -241,6 +241,17 @@
   line-height: 1.65;
 }
 
+/* ── BACKGROUND GRID ── */
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45,212,191,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,191,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
 /* ══════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════ */
@@ -327,3 +338,4 @@
   .about__timeline { padding: 1rem; }
   .about__tl-item { gap: 0.75rem; }
 }
+

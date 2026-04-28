@@ -7,121 +7,107 @@
 
 /* ─── THEME VARIABLES ────────────────────────────────── */
 :root {
-  /* Backgrounds */
-  --color-bg:         #080808;
-  --color-surface:    #101010;
-  --color-card:       #161616;
-  --color-card-hover: #1c1c1c;
+  --color-bg:          #080808;
+  --color-surface:     #0f0f0f;
+  --color-card:        #141414;
+  --color-card-hover:  #1a1a1a;
+  --color-border:      #1e1e1e;
+  --color-border-md:   #2a2a2a;
+  --color-text:        #f0f0f0;
+  --color-muted:       #555555;
+  --color-subtle:      #333333;
 
-  /* Borders */
-  --color-border:     #222222;
-  --color-border-md:  #2e2e2e;
+  /* Primary Accent — Teal */
+  --color-accent:             #2dd4bf;
+  --color-accent-dim:         #1a9e8e;
+  --color-accent-dark:        #0d6b60;
+  --color-accent-glow:        rgba(45, 212, 191, 0.12);
+  --color-accent-glow-strong: rgba(45, 212, 191, 0.22);
 
-  /* Text */
-  --color-text:       #f0ede8;
-  --color-muted:      #666666;
-  --color-subtle:     #444444;
+  /* Secondary Accent — Gold */
+  --color-gold:      #d4a853;
+  --color-gold-dim:  #a07a35;
+  --color-gold-glow: rgba(212, 168, 83, 0.12);
 
-  /* Accent — warm gold */
-  --color-accent:     #d4a853;
-  --color-accent-dim: #a07a35;
-  --color-accent-glow:rgba(212, 168, 83, 0.12);
+  --color-green: #4a9e6b;
+  --color-red:   #c94c3a;
 
-  /* Semantic */
-  --color-green:      #4a9e6b;
-  --color-red:        #c94c3a;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'Syne', sans-serif;
+  --font-mono:    'DM Mono', monospace;
 
-  /* Typography */
-  --font-display:  'Bebas Neue', sans-serif;
-  --font-body:     'Syne', sans-serif;
-  --font-mono:     'DM Mono', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
 
-  /* Spacing scale */
-  --space-xs:   0.5rem;
-  --space-sm:   1rem;
-  --space-md:   2rem;
-  --space-lg:   4rem;
-  --space-xl:   8rem;
+  --sidebar-width: 72px;
 
-  /* Transitions */
-  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
-  --transition:   0.25s var(--ease);
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition: 0.25s var(--ease);
 }
 
-/* ─── BASE ───────────────────────────────────────────── */
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+html { font-size: 16px; height: 100%; }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.6;
+  height: 100%;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
-/* ─── SELECTION ──────────────────────────────────────── */
-::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
+#root {
+  height: 100%;
+  display: flex;
 }
 
-/* ─── SCROLLBAR ──────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-border-md); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-accent-dim); }
+::selection { background: var(--color-accent); color: var(--color-bg); }
 
-/* ─── TYPOGRAPHY ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-accent-dark); border-radius: 2px; }
+
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   letter-spacing: 0.03em;
   line-height: 1;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+img, video { max-width: 100%; display: block; }
+button { font-family: var(--font-body); cursor: pointer; border: none; outline: none; background: none; }
 
-img, video {
-  max-width: 100%;
-  display: block;
-}
+.mono   { font-family: var(--font-mono); }
+.accent { color: var(--color-accent); }
+.gold   { color: var(--color-gold); }
+.muted  { color: var(--color-muted); }
 
-button {
-  font-family: var(--font-body);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-}
-
-/* ─── UTILITIES ──────────────────────────────────────── */
-.mono       { font-family: var(--font-mono); }
-.accent     { color: var(--color-accent); }
-.muted      { color: var(--color-muted); }
-
-.container {
+.page-wrapper {
+  display: flex;
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 3rem;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-.section {
-  padding: var(--space-xl) 0;
+.page-content {
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin-left: 88px;
+  transition: margin-left 0.3s var(--ease);
 }
 
-/* ─── SECTION LABEL ──────────────────────────────────── */
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
   display: flex;
@@ -132,30 +118,38 @@ button {
 .section-label::before {
   content: '';
   display: block;
-  width: 2rem;
+  width: 1.5rem;
   height: 1px;
   background: var(--color-accent);
 }
 
-/* ─── DIVIDER ────────────────────────────────────────── */
-.divider {
-  width: 100%;
-  height: 1px;
-  background: var(--color-border);
-}
-
-/* ─── FADE IN ANIMATION ──────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-.fade-up {
-  animation: fadeUp 0.7s var(--ease) both;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px var(--color-accent-glow); }
+  50%       { box-shadow: 0 0 24px var(--color-accent-glow-strong); }
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────── */
+.fade-up { animation: fadeUp 0.6s var(--ease) both; }
+.fade-in { animation: fadeIn 0.6s var(--ease) both; }
+
 @media (max-width: 768px) {
-  .container { padding: 0 1.5rem; }
-  .section   { padding: var(--space-lg) 0; }
+  .page-content { margin-left: 0; }
+}
+
+/* ── SIDEBAR EXPANDED STATE ── */
+.page-content {
+  margin-left: var(--sidebar-width);
+}
+@media (min-width: 769px) {
+  .sidebar--expanded ~ * .page-content,
+  .page-wrapper:has(.sidebar--expanded) .page-content {
+    margin-left: 210px;
+  }
 }

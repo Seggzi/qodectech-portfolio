@@ -1,9 +1,19 @@
 import './Services.css'
+import { TbWorldWww } from 'react-icons/tb'
+import { SiReact, SiNextdotjs, SiFigma } from 'react-icons/si'
+import {
+  RiRocketLine,
+  RiCodeSSlashLine,
+  RiPencilRulerLine,
+  RiRefreshLine,
+  RiSmartphoneLine,
+  RiGlobalLine,
+} from 'react-icons/ri'
 
 const services = [
   {
     num: '01',
-    icon: '🌐',
+    Icon: TbWorldWww,
     title: 'Web Development',
     color: '#2dd4bf',
     desc: 'From simple landing pages to complex multi-page websites. Pixel-perfect, fast-loading and built to impress — whether it\'s your brand, business or idea.',
@@ -11,7 +21,7 @@ const services = [
   },
   {
     num: '02',
-    icon: '⚛️',
+    Icon: SiReact,
     title: 'Frontend Development',
     color: '#d4a853',
     desc: 'Turning designs into living, breathing interfaces with React and Next.js. Clean component architecture, smooth animations and a UI your users will love.',
@@ -19,7 +29,7 @@ const services = [
   },
   {
     num: '03',
-    icon: '⚡',
+    Icon: SiNextdotjs,
     title: 'Full-Stack Web Apps',
     color: '#a855f7',
     desc: 'End-to-end web applications — from the UI down to the database. Auth, APIs, storage, and deployment all handled. You bring the idea, I build the product.',
@@ -27,7 +37,7 @@ const services = [
   },
   {
     num: '04',
-    icon: '🎨',
+    Icon: SiFigma,
     title: 'UI/UX Design',
     color: '#4a9e6b',
     desc: 'Before writing a single line of code, I design it. Figma wireframes, prototypes and design systems that look great and feel natural to use.',
@@ -36,39 +46,58 @@ const services = [
 ]
 
 const perks = [
-  { icon: '🚀', label: 'Fast Delivery' },
-  { icon: '✨', label: 'Clean Code' },
-  { icon: '📐', label: 'Design-First' },
-  { icon: '🔄', label: 'Revisions Included' },
-  { icon: '📱', label: 'Mobile-Ready' },
-  { icon: '🌍', label: 'Remote-Friendly' },
+  { Icon: RiRocketLine,      label: 'Fast Delivery',      color: '#2dd4bf' },
+  { Icon: RiCodeSSlashLine,  label: 'Clean Code',         color: '#d4a853' },
+  { Icon: RiPencilRulerLine, label: 'Design-First',       color: '#a855f7' },
+  { Icon: RiRefreshLine,     label: 'Revisions Included', color: '#4a9e6b' },
+  { Icon: RiSmartphoneLine,  label: 'Mobile-Ready',       color: '#2dd4bf' },
+  { Icon: RiGlobalLine,      label: 'Remote-Friendly',    color: '#d4a853' },
 ]
 
 export default function Services({ onNavigate }) {
   return (
     <section className="services">
+              <div className="hero__grid" aria-hidden="true" />
+
+
+      {/* ── HERO GRID LINES (same as Hero page) ── */}
+      <div className="services__grid" aria-hidden="true">
+        <div className="services__grid-v services__grid-v--1" />
+        <div className="services__grid-v services__grid-v--2" />
+        <div className="services__grid-v services__grid-v--3" />
+        <div className="services__grid-h services__grid-h--1" />
+        <div className="services__grid-h services__grid-h--2" />
+      </div>
+
       <div className="services__inner">
 
         {/* ── LEFT ── */}
         <div className="services__left">
           <p className="section-label">Services</p>
+
           <h2 className="services__heading">
             What I Can<br />
             <span className="accent">Build</span> for<br />
             You
           </h2>
+
           <p className="services__desc">
             Open to freelance, contract and collaboration.
-            Whether you need a <strong>landing page</strong>, a
-            <strong> full web app</strong>, or just someone to
+            Whether you need a <strong>landing page</strong>, a{' '}
+            <strong>full web app</strong>, or just someone to
             bring your design to life — I'm in.
           </p>
 
-          {/* Perks */}
+          {/* Perks — real icons */}
           <div className="services__perks">
             {perks.map(p => (
-              <span key={p.label} className="services__perk">
-                <span>{p.icon}</span>{p.label}
+              <span
+                key={p.label}
+                className="services__perk"
+                style={{ '--perk-color': p.color }}
+              >
+                <p.Icon className="services__perk-icon" />
+                {p.label}
               </span>
             ))}
           </div>
@@ -80,13 +109,23 @@ export default function Services({ onNavigate }) {
             <p className="services__cta-sub muted">
               Drop me a message and let's talk about your project.
             </p>
-            <button
-              className="services__cta-btn"
-              onClick={() => onNavigate(5)}
-            >
-              Let's Work Together
-              <span className="services__cta-arrow">→</span>
-            </button>
+            <div className="services__cta-buttons">
+              <button
+                className="services__cta-btn services__cta-btn--primary"
+                onClick={() => onNavigate(5)}
+              >
+                Let's Work Together
+                <span className="services__cta-arrow">→</span>
+              </button>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="services__cta-btn services__cta-btn--ghost"
+              >
+                Download CV ↓
+              </a>
+            </div>
           </div>
         </div>
 
@@ -103,7 +142,10 @@ export default function Services({ onNavigate }) {
             >
               <div className="services__card-top">
                 <div className="services__card-icon-wrap">
-                  <span className="services__card-icon">{s.icon}</span>
+                  <s.Icon
+                    className="services__card-icon"
+                    style={{ color: s.color, width: '22px', height: '22px' }}
+                  />
                 </div>
                 <div className="services__card-head">
                   <span className="services__card-num mono">{s.num}</span>
