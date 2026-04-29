@@ -47,9 +47,7 @@ export default function Skills() {
   return (
     <section className="skills">
 
-              <div className="hero__grid" aria-hidden="true" />
-
-
+        
       <div className="skills__inner">
 
         {/* ── LEFT ── */}

@@ -57,8 +57,7 @@ const perks = [
 export default function Services({ onNavigate }) {
   return (
     <section className="services">
-              <div className="hero__grid" aria-hidden="true" />
-
+        
 
       {/* ── HERO GRID LINES (same as Hero page) ── */}
       <div className="services__grid" aria-hidden="true">

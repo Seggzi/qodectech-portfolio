@@ -1,13 +1,4 @@
-/* ── BACKGROUND GRID ── */
-.hero__grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(45,212,191,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45,212,191,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
+
 
 /* ── BACKGROUND GRID ── */
 .hero__grid {

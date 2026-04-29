@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* ─── THEME VARIABLES ────────────────────────────────── */
 :root {
   --color-bg:          #080808;
   --color-surface:     #0f0f0f;
@@ -49,65 +48,80 @@
   --transition: 0.25s var(--ease);
 }
 
-html { font-size: 16px; height: 100%; }
+/* ─── BASE ───────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.6;
-  height: 100%;
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-#root {
-  height: 100%;
-  display: flex;
+/* ─── SELECTION ──────────────────────────────────────── */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
 
-::selection { background: var(--color-accent); color: var(--color-bg); }
+/* ─── SCROLLBAR ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border-md); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-dim); }
 
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-accent-dark); border-radius: 2px; }
-
+/* ─── TYPOGRAPHY ─────────────────────────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   letter-spacing: 0.03em;
   line-height: 1;
 }
 
-a { color: inherit; text-decoration: none; }
-img, video { max-width: 100%; display: block; }
-button { font-family: var(--font-body); cursor: pointer; border: none; outline: none; background: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-.mono   { font-family: var(--font-mono); }
-.accent { color: var(--color-accent); }
-.gold   { color: var(--color-gold); }
-.muted  { color: var(--color-muted); }
+img, video {
+  max-width: 100%;
+  display: block;
+}
 
-.page-wrapper {
-  display: flex;
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* ─── UTILITIES ──────────────────────────────────────── */
+.mono       { font-family: var(--font-mono); }
+.accent     { color: var(--color-accent); }
+.muted      { color: var(--color-muted); }
+
+.container {
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 3rem;
 }
 
-.page-content {
-  flex: 1;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  margin-left: 88px;
-  transition: margin-left 0.3s var(--ease);
+.section {
+  padding: var(--space-xl) 0;
 }
 
+/* ─── SECTION LABEL ──────────────────────────────────── */
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accent);
   display: flex;
@@ -118,38 +132,30 @@ button { font-family: var(--font-body); cursor: pointer; border: none; outline: 
 .section-label::before {
   content: '';
   display: block;
-  width: 1.5rem;
+  width: 2rem;
   height: 1px;
   background: var(--color-accent);
 }
 
+/* ─── DIVIDER ────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ─── FADE IN ANIMATION ──────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 12px var(--color-accent-glow); }
-  50%       { box-shadow: 0 0 24px var(--color-accent-glow-strong); }
+
+.fade-up {
+  animation: fadeUp 0.7s var(--ease) both;
 }
 
-.fade-up { animation: fadeUp 0.6s var(--ease) both; }
-.fade-in { animation: fadeIn 0.6s var(--ease) both; }
-
+/* ─── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 768px) {
-  .page-content { margin-left: 0; }
-}
-
-/* ── SIDEBAR EXPANDED STATE ── */
-.page-content {
-  margin-left: var(--sidebar-width);
-}
-@media (min-width: 769px) {
-  .sidebar--expanded ~ * .page-content,
-  .page-wrapper:has(.sidebar--expanded) .page-content {
-    margin-left: 210px;
-  }
+  .container { padding: 0 1.5rem; }
+  .section   { padding: var(--space-lg) 0; }
 }

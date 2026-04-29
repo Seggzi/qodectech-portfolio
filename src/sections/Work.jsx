@@ -88,9 +88,7 @@ export default function Work() {
   return (
     <section className="work">
 
-            <div className="hero__grid" aria-hidden="true" />
-
-
+      
       <div className="work__inner">
 
         {/* ── LEFT ── */}
