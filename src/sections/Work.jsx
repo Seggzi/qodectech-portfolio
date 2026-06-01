@@ -23,6 +23,16 @@ const live = [
     github: 'https://github.com/Seggzi/primescene',
     img: '/screenshots/primescene.png',
     accent: '#d4a853',
+  },{
+    id: 'Repliq',
+    title: 'Repliq',
+    tag: 'Message Checker',
+    desc: 'A simple message checking tool integrated with a REST API.',
+    stack: ['React', 'Tailwind CSS', 'REST API'],
+    live: 'https://repliq-fl13.vercel.app/',
+    github: 'https://github.com/Seggzi/Repliq',
+    img: '/screenshots/repliq.png',
+    accent: '#2385e0',
   },
 ]
 
